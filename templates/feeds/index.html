@@ -2,8 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <link href=' http://fonts.googleapis.com/css?family=Droid+Serif:italic,bold' rel='stylesheet' type='text/css'>
+    <title>{{ headline }}</title>
     <link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
         body {
@@ -69,7 +68,7 @@
     
     function OnLoad() {
       // Create a feed instance that will grab Digg's feed.
-      var feed = new google.feeds.Feed("http://pipes.yahoo.com/pipes/pipe.run?_id=OtSAI5r83BGLeywRG8evXg&_render=rss");
+      var feed = new google.feeds.Feed("{{ feed_url }}");
       // Calling load sends the request off.  It requires a callback function.
       feed.setNumEntries(10);
       feed.load(feedLoaded);
@@ -80,7 +79,7 @@
     </script>
   </head>
   <body style="font-family: Arial;border: 0 none;">
-    <h1>Trending on Google</h1>
+    <h1>{{ headline }}</h1>
     <hr></hr>
     <div id="content">Loading...</div>
   </body>

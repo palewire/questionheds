@@ -15,17 +15,13 @@
 # Urls
 from django.conf.urls.defaults import *
 
-# Views
-from django.views.generic.simple import direct_to_template
-
 # Settings
 from django.conf import settings
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns('views',
 
     # Redirect the root URL
-    url(r'^$', direct_to_template, { 'template': 'feeds/google_trends.html' },
-        name='index'),
+    url(r'^$', 'index', name='index'),
 
 )
