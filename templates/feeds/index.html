@@ -68,7 +68,7 @@
     
     function OnLoad() {
       // Create a feed instance that will grab Digg's feed.
-      var feed = new google.feeds.Feed("{{ feed_url }}");
+      var feed = new google.feeds.Feed("{{ feed_url|safe }}");
       // Calling load sends the request off.  It requires a callback function.
       feed.setNumEntries(10);
       feed.load(feedLoaded);

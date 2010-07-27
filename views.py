@@ -1,3 +1,6 @@
+# Response
+from django.http import Http404
+
 # Views
 from django.views.generic.simple import direct_to_template
 
@@ -16,7 +19,12 @@ def index(request):
     """
     Returns a feed page, depending on the querystring.
     """
+    # Figure out what page we're serving
     slug = request.GET.get('feed', 'google')
+    if slug not in HEADLINES.keys():
+        raise Http404
+
+    # Pass out the proper data
     context = {
         'headline': HEADLINES[slug],
         'feed_url': FEEDS[slug],

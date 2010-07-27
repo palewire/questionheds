@@ -15,13 +15,16 @@
 # Urls
 from django.conf.urls.defaults import *
 
+# Views
+from views import index
+from django.views.generic.simple import direct_to_template
+
 # Settings
 from django.conf import settings
 
 
-urlpatterns = patterns('views',
+urlpatterns = patterns('',
 
-    # Redirect the root URL
-    url(r'^$', 'index', name='index'),
+    url(r'^$', index, name='index'),
 
 )
