@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href=' http://fonts.googleapis.com/css?family=Droid+Serif:italic,bold' rel='stylesheet' type='text/css'>
+    <link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body {
+            width:100%;
+            text-align:center;
+        }
+        h1 {
+            font-family: Georgia, arial, serif;
+            text-transform:uppercase;
+            font-weight:normal;
+            font-size: 20px;
+        }
+        hr {
+            width:10%;
+            margin-bottom:20px;
+        }
+        #content {
+            font-family: 'Droid Sans', arial, serif;
+        }
+        #content div {
+            margin-bottom:20px;
+        }
+        em {
+            font-style: normal;
+            font-size:26px;
+        }
+        strong {
+            font-weight:normal;
+            font-size: 56px;
+        }
+    </style>
+    <script src="http://www.google.com/jsapi?key=AIzaSyA5m1Nc8ws2BbmPRwKu5gFradvD_hgq6G0" type="text/javascript"></script>
+    <script type="text/javascript">
+    /*
+    *  How to load a feed via the Feeds API.
+    */
+    
+    google.load("feeds", "1");
+    
+    // Our callback function, for when a feed is loaded.
+    function feedLoaded(result) {
+      if (!result.error) {
+        // Grab the container we will put the results into
+        var container = document.getElementById("content");
+        container.innerHTML = '';
+    
+        // Loop through the feeds, putting the titles onto the page.
+        // Check out the result object for a list of properties returned in each entry.
+        // http://code.google.com/apis/ajaxfeeds/documentation/reference.html#JSON
+        for (var i = 0; i < result.feed.entries.length; i++) {
+          var entry = result.feed.entries[i];
+          var div = document.createElement("div");
+          var number = document.createElement("em");
+          number.appendChild(document.createTextNode(i+1 + ". "));
+          var keyword = document.createElement("strong");
+          keyword.appendChild(document.createTextNode(entry.title));
+          div.appendChild(number);
+          div.appendChild(keyword);
+          container.appendChild(div);
+        }
+      }
+    }
+    
+    function OnLoad() {
+      // Create a feed instance that will grab Digg's feed.
+      var feed = new google.feeds.Feed("http://pipes.yahoo.com/pipes/pipe.run?_id=OtSAI5r83BGLeywRG8evXg&_render=rss");
+      // Calling load sends the request off.  It requires a callback function.
+      feed.setNumEntries(10);
+      feed.load(feedLoaded);
+
+    }
+    
+    google.setOnLoadCallback(OnLoad);
+    </script>
+  </head>
+  <body style="font-family: Arial;border: 0 none;">
+    <h1>Trending on Google</h1>
+    <hr></hr>
+    <div id="content">Loading...</div>
+  </body>
+</html>
+​
