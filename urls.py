@@ -23,7 +23,9 @@ from questionheds.feeds import LatestEntries
 
 urlpatterns = patterns('',
 
-    url(r'^$', 'questionheds.views.index', name='index'),
+    #url(r'^$', 'questionheds.views.index', name='index'),
+    url(r'^$', 'django.views.generic.simple.redirect_to', 
+        {'url': '/feeds/latest'}, name='index'),
 
     url(r'^_/update/$', 'questionheds.tasks.update_handler', name='update-hander'),
     url(r'^_/fetch/$', 'questionheds.tasks.fetch_worker', name='fetch-worker'),
