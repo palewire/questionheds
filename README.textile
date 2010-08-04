@@ -1,3 +1,5 @@
 h1. Questionheds
 
 A feed of headlines that end in a question mark.
+
+Runs on Google App Engine. Uses Yahoo News API. Needs a couple settings filled in before it will work for you.
