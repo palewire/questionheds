@@ -10,5 +10,5 @@ class LatestEntries(Feed):
     description_template = 'feeds/description.html'
 
     def items(self):
-        return Item.all().order('-pubDate').fetch(10)
+        return Item.all().order('-pubDate').fetch(50)
 

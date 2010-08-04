@@ -8,7 +8,7 @@ def index(request):
     Returns a feed page with the latest items.
     """
     context = {
-        'headline': u'Latest Questionheds',
+        'headline': u'Questionheds',
         'feed_site': RequestSite(request),
         'feed_url': '/feeds/latest/',
         'GOOGLE_API_KEY': settings.GOOGLE_API_KEY,

@@ -1,5 +1,5 @@
 cron:
-- description: Update 1-50
+- description: Update headlines
   url: /_/update/
   schedule: every 10 minutes
 
