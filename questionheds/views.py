@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import Http404, HttpResponse
 from django.views.generic.simple import direct_to_template
-
+from django.contrib.sites.models import RequestSite
 
 def index(request):
     """
@@ -9,6 +9,7 @@ def index(request):
     """
     context = {
         'headline': u'Latest Questionheds',
+        'feed_site': RequestSite(request),
         'feed_url': '/feeds/latest/',
         'GOOGLE_API_KEY': settings.GOOGLE_API_KEY,
     }
