@@ -15,16 +15,20 @@
 # Urls
 from django.conf.urls.defaults import *
 
-# Views
-from views import index
-from django.views.generic.simple import direct_to_template
-
 # Settings
 from django.conf import settings
 
+# Feeds
+from questionheds.feeds import LatestEntries
 
 urlpatterns = patterns('',
 
-    url(r'^$', index, name='index'),
+    url(r'^$', 'questionheds.views.index', name='index'),
+
+    url(r'^_/fetch/$', 'questionheds.views.fetch', name='fetch'),
+
+    url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
+        {'feed_dict': dict(latest=LatestEntries) },
+        name='feeds'),
 
 )
