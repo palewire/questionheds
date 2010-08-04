@@ -37,25 +37,8 @@ def fetch_worker(request):
                 description=item['description'],
                 pubDate=item['pubDate'],
             )
-            taskqueue.add(
-                url=reverse('add-worker', args=[]),
-                params=data,
-                method='GET'
-            )
+            obj = Item(**data)
+            obj.put()
             adds += 1
     return HttpResponse('%s adds' % adds, mimetype='text/plain')
 
-
-def add_worker(request):
-    """
-    Adds a record to the Item model.
-    """
-    data = dict(
-        title=request.GET.get('title'),
-        link=request.GET.get('link'),
-        description=request.GET.get('description'),
-        pubDate=request.GET.get('pubDate'),
-    )
-    obj = Item(**data)
-    obj.put()
-    return HttpResponse(u"'%s' added" % data['title'], mimetype='text/plain')

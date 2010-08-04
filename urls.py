@@ -27,7 +27,6 @@ urlpatterns = patterns('',
 
     url(r'^_/update/$', 'questionheds.tasks.update_handler', name='update-hander'),
     url(r'^_/fetch/$', 'questionheds.tasks.fetch_worker', name='fetch-worker'),
-    url(r'^_/add/$', 'questionheds.tasks.add_worker', name='add-worker'),
 
     url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': dict(latest=LatestEntries) },
