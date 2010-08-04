@@ -1,6 +1,6 @@
 cron:
 - description: Update headlines
   url: /_/update/
-  schedule: every 10 minutes
+  schedule: every 5 minutes
 
 
