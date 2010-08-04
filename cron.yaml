@@ -1,32 +1,6 @@
 cron:
 - description: Update 1-50
-  url: /_/fetch/?start=0
-  schedule: every 15 minutes
-- description: Update 51-100
-  url: /_/fetch/?start=51
-  schedule: every 15 minutes
-- description: Update 101-150
-  url: /_/fetch/?start=101
-  schedule: every 15 minutes
-- description: Update 151-200
-  url: /_/fetch/?start=151
-  schedule: every 15 minutes
-- description: Update 201-250
-  url: /_/fetch/?start=201
-  schedule: every 15 minutes
-- description: Update 251-300
-  url: /_/fetch/?start=251
-  schedule: every 15 minutes
-- description: Update 301-350
-  url: /_/fetch/?start=301
-  schedule: every 15 minutes
-- description: Update 351-400
-  url: /_/fetch/?start=351
-  schedule: every 15 minutes
-- description: Update 401-450
-  url: /_/fetch/?start=401
-  schedule: every 15 minutes
-- description: Update 451-500
-  url: /_/fetch/?start=451
-  schedule: every 15 minutes
+  url: /_/update/
+  schedule: every 10 minutes
+
 
