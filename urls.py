@@ -19,13 +19,14 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 
 # Feeds
-from questionheds.feeds import LatestEntries
+from questionheds.feeds import LatestHeds
+from questionledes.feeds import LatestLedes
 
 urlpatterns = patterns('',
 
     #url(r'^$', 'questionheds.views.index', name='index'),
     url(r'^$', 'django.views.generic.simple.redirect_to', 
-        {'url': '/feeds/latest'}, name='index'),
+        {'url': '/feeds/latest/'}, name='index'),
 
     url(r'^_/update/heds/$', 'questionheds.tasks.update_handler', name='update-hander'),
     url(r'^_/fetch/heds/$', 'questionheds.tasks.fetch_worker', name='fetch-worker'),
@@ -34,7 +35,6 @@ urlpatterns = patterns('',
     url(r'^_/fetch/ledes/$', 'questionledes.tasks.fetch_worker', name='fetch-ledes-worker'),
 
     url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
-        {'feed_dict': dict(latest=LatestEntries) },
-        name='feeds'),
+        {'feed_dict': dict(latest=LatestHeds, heds=LatestHeds, ledes=LatestLedes) }, name='feeds'),
 
 )
