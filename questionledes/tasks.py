@@ -1,4 +1,4 @@
-from questionledes.models import LedeItem
+from questionledes.models import LedeItem, LedeBlacklist
 from questionledes.fetch import YahooNews
 from google.appengine.api.labs import taskqueue
 from django.http import Http404, HttpResponse
@@ -17,6 +17,21 @@ def update_handler(request):
             method='GET'
         )
     return HttpResponse('Updating', mimetype='text/plain')
+
+
+def add_blacklist_worker(request):
+    """
+    Add a new black list item.
+    """
+    lede = request.GET.get('lede', None)
+    if not lede:
+        raise Http404
+    query = LedeBlacklist.all()
+    query = query.filter('lede =', lede)
+    if not query.fetch(1):
+        obj = LedeBlacklist(lede=lede)
+        obj.put()
+    return HttpResponse('OK', mimetype='text/plain')
 
 
 def fetch_worker(request):
