@@ -8,6 +8,9 @@ from django.conf import settings
 from datetime import datetime
 from django.utils import simplejson
 
+# Models
+from questionledes.models import LedeBlacklist
+
 
 class YahooNews(object):
     """
@@ -29,6 +32,10 @@ class YahooNews(object):
     def detect_questionlede(self, string):
         lede = self.get_lede(string)
         if not lede or lede[-1] != '?':
+            return False
+        query = LedeBlacklist.all()
+        query = query.filter('lede =', lede)
+        if query.fetch(1):
             return False
         return True
 

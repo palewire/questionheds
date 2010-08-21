@@ -14,3 +14,9 @@ class LedeItem(db.Model):
     def get_absolute_url(self):
         return self.link
 
+
+class LedeBlacklist(db.Model):
+    """
+    Ledes we want to block.
+    """
+    lede = db.StringProperty()
