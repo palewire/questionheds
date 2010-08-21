@@ -102,6 +102,8 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
      'appengine_django',
+     'questionheds',
+     'questionledes',
 )
 
 from settings_private import YAHOO_APP_ID

@@ -1,3 +1,4 @@
+import re
 import os
 import sys
 import urllib
@@ -16,6 +17,7 @@ class YahooNews(object):
     def __init__(self, start):
         self.APP_ID = settings.YAHOO_APP_ID
         self.start = start
+        self.regex = re.compile('[.?!] [A-Z]')
 
     def __getattr__(self):
         return YahooNews()
@@ -23,6 +25,20 @@ class YahooNews(object):
     def __repr__(self):
         return "<YahooNews: %s>" % self.APP_ID
         
+
+    def detect_questionlede(self, string):
+        lede = self.get_lede(string)
+        if not lede or lede[-1] != '?':
+            return False
+        return True
+
+    def get_lede(self, string):
+        search = self.regex.search(string)
+        if not search:
+            return None
+        index = search.start()+1
+        return string[:index]
+
     def __call__(self):
         
         base_url = 'http://search.yahooapis.com/NewsSearchService/V1/newsSearch'
@@ -43,10 +59,11 @@ class YahooNews(object):
             dict(
                 title=i['Title'],
                 link=i['Url'],
+                lede=self.get_lede(i['Summary']),
                 description=i['Summary'],
                 pubDate=datetime.fromtimestamp(float(i['PublishDate'])),
             ) for i in json['ResultSet']['Result']
-                if i['Title'][-1] == '?'
+                if self.detect_questionlede(i['Summary'])
         ]
         return headline_list
 

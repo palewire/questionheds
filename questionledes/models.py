@@ -1,12 +1,13 @@
 from google.appengine.ext import db
 
 
-class HedItem(db.Model):
+class LedeItem(db.Model):
     """
     A news story in RSS format
     """
     title = db.StringProperty()
     link = db.LinkProperty()
+    lede = db.StringProperty()
     description = db.TextProperty()
     pubDate = db.DateTimeProperty()
 
