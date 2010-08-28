@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     url(r'^_/update/ledes/$', 'questionledes.tasks.update_handler', name='update-ledes-hander'),
     url(r'^_/fetch/ledes/$', 'questionledes.tasks.fetch_worker', name='fetch-ledes-worker'),
     url(r'^_/add/blacklist/lede/$', 'questionledes.tasks.add_blacklist_worker', name='add-blacklist-ledes-worker'),
-
+    url(r'^_/add/blacklist/domain/$', 'questionledes.tasks.add_blacklist_domain_worker', name='add-blacklist-domain-worker'),
 
     url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': dict(latest=LatestHeds, heds=LatestHeds, ledes=LatestLedes) }, name='feeds'),

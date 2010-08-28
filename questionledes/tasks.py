@@ -1,4 +1,4 @@
-from questionledes.models import LedeItem, LedeBlacklist
+from questionledes.models import LedeItem, LedeBlacklist, DomainBlacklist
 from questionledes.fetch import YahooNews
 from google.appengine.api.labs import taskqueue
 from django.http import Http404, HttpResponse
@@ -34,6 +34,21 @@ def add_blacklist_worker(request):
     return HttpResponse('OK', mimetype='text/plain')
 
 
+def add_blacklist_domain_worker(request):
+    """
+    Add a new black list domain.
+    """
+    domain = request.GET.get('domain', None)
+    if not domain:
+        raise Http404
+    query = DomainBlacklist.all()
+    query = query.filter('domain =', domain)
+    if not query.fetch(1):
+        obj = DomainBlacklist(domain=domain)
+        obj.put()
+    return HttpResponse('OK', mimetype='text/plain')
+
+
 def fetch_worker(request):
     """
     Examine a YahooNews feed and figure out what records need to be added.
@@ -49,6 +64,7 @@ def fetch_worker(request):
             data = dict(
                 title=item['title'],
                 link=item['link'],
+                domain=item['domain'],
                 lede=item['lede'],
                 description=item['description'],
                 pubDate=item['pubDate'],

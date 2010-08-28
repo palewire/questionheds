@@ -7,6 +7,7 @@ class LedeItem(db.Model):
     """
     title = db.StringProperty()
     link = db.LinkProperty()
+    domain = db.StringProperty()
     lede = db.StringProperty()
     description = db.TextProperty()
     pubDate = db.DateTimeProperty()
@@ -20,3 +21,10 @@ class LedeBlacklist(db.Model):
     Ledes we want to block.
     """
     lede = db.StringProperty()
+
+
+class DomainBlacklist(db.Model):
+    """
+    Domains we want to block.
+    """
+    domain = db.StringProperty()
