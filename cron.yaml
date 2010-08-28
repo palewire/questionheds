@@ -1,9 +1,9 @@
 cron:
 - description: Update headlines
   url: /_/update/heds/
-  schedule: every 5 minutes
+  schedule: every 2 minutes
 
 - description: Update ledes
   url: /_/update/ledes/
-  schedule: every 5 minutes
+  schedule: every 2 minutes
 
